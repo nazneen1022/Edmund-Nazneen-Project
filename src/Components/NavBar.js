@@ -1,11 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "../Styles/Page.css";
 
 export default function HomePage() {
   return (
-    <div>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/cart">Cart</NavLink>
+    <div className="page">
+      <NavLink style={{ padding: "40px" }} to="/">
+        Home
+      </NavLink>
+      <NavLink style={{ padding: "40px" }} to="/cart">
+        Cart
+      </NavLink>
     </div>
   );
 }

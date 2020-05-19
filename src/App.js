@@ -10,6 +10,16 @@ function App() {
     <div>
       <Router>
         <NavBar />
+        <p
+          style={{
+            padding: "10px",
+            fontWeight: "bold",
+            fontFamily: "Calibri",
+            fontSize: "25px",
+          }}
+        >
+          Groceries Webshop!!
+        </p>
         <Switch>
           <Route path="/Cart" component={Cart}></Route>
           <Route path="/" component={HomePage}></Route>
