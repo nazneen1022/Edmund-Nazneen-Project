@@ -13,9 +13,33 @@
 }
 
 .flex-container > div {
-  width: 100px;
   margin: 10px;
   text-align: center;
+}
+.row {
+  border: 1px solid;
+}
+.parent {
+  display: flex;
+  overflow: hidden;
+  margin: 1em 0;
+  color: black;
+  border: 1px solid #333;
+  align-items: center;
+  width: 100%;
+}
+#parent5 {
+  flex: 1;
+}
 
-  font-size: 30px;
+.left {
+  padding: 1em;
+  text-align: left;
+  width: 70%;
+}
+
+.right {
+  padding: 1em;
+  text-align: center;
+  width: 30%;
 }
