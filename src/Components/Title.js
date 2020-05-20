@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectCartProducts } from "../store/selectors";
 import "../Styles/Page.css";
 
 export default function Title() {
+  const cartProducts = useSelector(selectCartProducts);
   return (
     <div
       style={{
@@ -19,7 +22,9 @@ export default function Title() {
       >
         Groceries Webshop!!
       </div>
-      <div style={{ textAlign: "right" }}>0 items in cart</div>
+      <div style={{ textAlign: "right" }}>
+        {cartProducts.length} items in cart
+      </div>
     </div>
   );
 }
