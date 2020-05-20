@@ -43,3 +43,17 @@
   text-align: center;
   width: 30%;
 }
+table {
+  text-align: left;
+}
+
+th,
+td {
+  text-align: left;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(220, 220, 228);
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import selectProducts from "../store/selectors";
 //import "../Styles/ToggleSwitch.css";
 import "../Styles/Page.css";
@@ -9,7 +9,9 @@ export default function HomePage() {
   const [selectOption, setSelectOption] = useState();
   const [toggle, setToggle] = useState([]);
   const allProducts = useSelector(selectProducts);
+  const dispatch = useDispatch();
 
+  console.log("allProducts:", allProducts);
   const tags = allProducts.map((product) => product.tags);
   let jointArray = [];
   tags.forEach((tag) => {
@@ -22,8 +24,18 @@ export default function HomePage() {
 
   let sortedProducts;
 
-  function handleOnClick() {
+  function handleOnClick(productId, productName, productPrice) {
     //console.log("TODO");
+    const action = {
+      type: "ADD_TO_CART",
+      payload: {
+        id: productId,
+        name: productName,
+        qty: 1,
+        price: productPrice,
+      },
+    };
+    dispatch(action);
   }
   function handleOnChange(event, tag) {
     if (event.target.checked) {
@@ -34,18 +46,18 @@ export default function HomePage() {
   }
 
   const selectedList = allProducts.filter((product) => {
-    return toggle.every((val) => product.tags.includes(val));
+    return toggle.some((val) => product.tags.includes(val));
   });
   // console.log("toggle:", toggle);
-  // console.log("selectedList,", selectedList);
+
   let products;
-  console.log("toggle.length:", toggle.length);
-  if (toggle.length < 0) {
+  //console.log("toggle.length:", toggle.length);
+  if (toggle.length <= 0) {
     products = allProducts;
   } else {
     products = selectedList;
   }
-
+  //console.log("products,", products);
   switch (selectOption) {
     case "price": {
       sortedProducts = [...products].sort((a, b) => a.price - b.price);
@@ -135,7 +147,13 @@ export default function HomePage() {
             </div>
             <p>
               Add to cart{"       "}
-              <button onClick={handleOnClick}>+</button>
+              <button
+                onClick={() =>
+                  handleOnClick(product.id, product.name, product.price)
+                }
+              >
+                +
+              </button>
             </p>
           </div>
         ))}
