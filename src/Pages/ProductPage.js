@@ -1,37 +1,51 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import store from "../db"
+const selectSpecificProduct = (params) => {
+  return (state) => {
+    return state.products.products.find((product) => product.id === params);
+  };
+};
 
 export default function ProductPage() {
-  const [cartCount, setCartCount] = useState(0)
-  const params = parseInt(useParams().productId)
-  const storeProducts = store.products
-
-  const findProductArray = storeProducts.find(function (product) {
-    return product.id === params
-  })
+  const [cartCount, setCartCount] = useState(0);
+  const params = parseInt(useParams().productId);
+  const product = useSelector(selectSpecificProduct(params));
 
   return (
-    <div>Product page
-      <h3>{findProductArray.name}</h3>
-      <p>Tags: {findProductArray.tags}</p>
-      <p>Price: ${findProductArray.price}</p>
-      {/* <img src={} width='200' alt='profile' /> */}
-      <button onClick={() => { setCartCount(cartCount + 1) }}>
+    <div style={{ textAlign: "center" }}>
+      Product page
+      <h2>{product.name}</h2>
+      <img src={product.img} width="400" alt="profile" />
+      <p>Tags: {product.tags}</p>
+      <p>Price: ${product.price}</p>
+      <button
+        onClick={() => {
+          setCartCount(cartCount + 1);
+        }}
+      >
         Add to cart
       </button>
       <p>
-        <button onClick={() => { setCartCount(cartCount - 1) }}>
+        <button
+          onClick={() => {
+            setCartCount(cartCount - 1);
+          }}
+        >
           -
         </button>
 
         {`${cartCount} in cart`}
 
-        <button onClick={() => { setCartCount(cartCount + 1) }}>
+        <button
+          onClick={() => {
+            setCartCount(cartCount + 1);
+          }}
+        >
           +
         </button>
       </p>
     </div>
-  )
+  );
 }

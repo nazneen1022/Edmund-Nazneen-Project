@@ -5,26 +5,18 @@ import NavBar from "./Components/NavBar";
 import HomePage from "./Pages/HomePage";
 import Cart from "./Pages/Cart";
 import ProductPage from "./Pages/ProductPage";
+import Title from "./Components/Title";
 
 function App() {
   return (
     <div>
       <Router>
         <NavBar />
-        <p
-          style={{
-            padding: "10px",
-            fontWeight: "bold",
-            fontFamily: "Calibri",
-            fontSize: "25px",
-          }}
-        >
-          Groceries Webshop!!
-        </p>
+        <Title />
         <Switch>
           <Route path="/Cart" component={Cart}></Route>
           <Route exact path="/" component={HomePage}></Route>
-          <Route path="/:productId" component={ProductPage}></Route>
+          <Route path="/product/:productId" component={ProductPage}></Route>
         </Switch>
       </Router>
     </div>
